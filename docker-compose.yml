@@ -1,0 +1,22 @@
+services:
+  api:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      - PORT=3000
+      - MONGODB_URI=mongodb+srv://card-flip:YrcfDMbOR0PAZe3W@card-flip.fozph.mongodb.net/?retryWrites=true&w=majority&appName=card-flip
+    depends_on:
+      - mongo
+    volumes:
+      - ./src:/app/src
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
